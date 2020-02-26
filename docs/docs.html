@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Documentation CK Framework</title>
+<link rel="alternate" type="application/rss+xml" title="egrappler.com" href="feed/index.html">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet"
+        type="text/css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/prettify.css">
+</head>
+<body>
+<nav>
+  <div class="container">
+    <h1>CK.F</h1>
+    <div id="menu">
+      <ul class="toplinks">
+        <li><a href="#">Documentation</a></li>
+      </ul>
+    </div>
+    <a id="menu-toggle" href="#" class=" ">&#9776;</a> </div>
+</nav>
+<header>
+  <div class="container">
+    <h2 class="docs-header">Ease of use and development by CK</h2>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <ul class="docs-nav" id="menu-left">
+      <li><strong>Getting Started</strong></li>
+      <li><a href="#welcome" class=" ">Welcome</a></li>
+      <li class="separator"></li>
+      <li><strong>Starting _Core</strong></li>
+      <li><a href="#corestart" class=" ">Core Start</a></li>
+      <li><a href="#UsingType" class=" ">Using</a></li>
+    </ul>
+    <div class="docs-content">
+      <h2> Getting Started</h2>
+      <h3 id="welcome"> Welcome</h3>
+      <p> Are you listening to your customers?</p>
+      
+      <p> This is a framework still under development where all content is open source, and the rest of the scripts are made by the RedM RP Community.</p>
+      <ul>
+        <li>LUAOOP</li>
+        <li>Tunnel and proxy communication using metatable by ImagicTheCat </li>
+        <li>Inventory, horse, basic needs, groups, prompts, shop items, multi characters, only need create a script to use this classes ;)</li>
+      </ul>
+      <p> We created thinking about ease of development, where it is possible to create several characters, several classes where it can be used globally in any script using tunnel and proxy. </p>
+   
+      <h3 id="corestart"> Installation</h3>
+      <ul>
+        <li>Clone this repository from github.</li>
+        <li>Import the database to your MariaDB</li>
+        <li>Change <font style="color:red">GHMattiMySQL/settings.xml</font> and <font style="color:red">_core/server/database.lua</font> to your connection database.</li>
+        <li>After this steps, only put online and go work in your scripts</li>
+      </ul>
+     
+      <h4> _core/server/database.lua </h4>
+      <pre class="prettyprint">DBConnect = {
+	driver = 'ghmattimysql', -- not change this :D
+	host = '127.0.0.1', -- localhost or host ip
+	database = 'fcrp', -- your database 
+	user = 'root', -- your database login
+	password = '' -- put your password here
+}</pre>
+	  
+      <h4> GHMattiMySQL/settings.xml </h4>
+      <pre class="prettyprint"><img src="https://i.imgur.com/JjHGtmp.png"></img></pre>
+      <h3 id="UsingType"> Using</h3>
+      <ul>
+        <li>Calling User Example:</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+</pre>
+      <ul>
+        <li>How get all User Classes? Example:</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+for _,index in pairs(User) do
+	print(_) -- here you get all classes that you can use 
+end
+</pre>
+      <ul>
+        <li>How get Character Using?</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+</pre>
+      <ul>
+        <li>How get all Character Classes? Example:</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+for _,index in pairs(Character) do
+	print(_) -- here you get all classes that you can use 
+end
+</pre>
+      <ul>
+        <li>API - this is the main vector of the structure</li>
+      </ul>
+      <pre class="prettyprint">
+API.getUserIdByIdentifiers( int ids, string name ) -- Receive User ID or create :D
+API.getUserFromUserId( int user_id ) -- Get ```local User (used above :D)```
+API.getUserFromSource( int source ) -- Get ```local User (used above :D)```
+API.getUserIdFromSourceIdentifier( int source ) -- Get User ID
+API.getUserFromCharId( int charid ) -- Get User by Character ID
+API.getUserIdFromCharId( int charid ) -- Get User ID by Character ID
+API.getUsers(  ) -- Get All Users Online
+API.setBanned( int user_id ) -- Set Banned
+API.isBanned( int user_id ) -- Is Banned ??
+API.isWhitelisted( string identifier ) -- Is Whitelisted?
+API.dropPlayer( int source, string reason ) -- Drop player from session (required)
+API.kick( int source, string reason ) -- Kick Player
+</pre>
+      <h3 id="bars_text"> Character Class how use?</h3>
+      <ul>
+        <li>Get Inventory</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Inventory = User:getCharacter():getInventory()
+
+or
+
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local Inventory = Character:getInventory()
+</pre>
+      <ul>
+        <li>Add Group</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+Character:addGroup("`group name in string here`")
+</pre>
+      <ul>
+        <li>Remove Group</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+Character:removeGroup("`group name in string here`")</pre>
+      <ul>
+        <li>Has Group</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+if Character:hasGroup("`group name in string here`") then
+	-- im cool :D
+end
+</pre
+      <ul>
+        <li>Get Character ID</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local char_id = Character:getId()
+</pre>
+      <ul>
+        <li>Get Character Name</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local char_id = Character:getName()
+</pre>
+      <ul>
+        <li>Get Character Level</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local char_id = Character:getLevel()
+</pre
+      <ul>
+        <li>Get Character XP</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local char_id = Character:getXp()
+</pre>
+
+      <ul>
+        <li>Add Character XP</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local value = 5
+local char_id = Character:addXp(value) -- add 5 xp :D
+</pre>
+      <ul>
+        <li>Remove Character XP</li>
+      </ul>
+      <pre class="prettyprint">
+local _source = source
+local User = API.getUserFromSource(_source)
+local Character = User:getCharacter()
+local value = 5
+local char_id = Character:removeXp(value) -- remove 5 xp :D
+</pre>
+
+To see more functions, go to <font style="color:red">_core/server/class/</font> and choose :)
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <p> &copy; 2020 Crazy and Key Framework </p>
+  </div>
+</footer>
+<script src="js/jquery.min.js"></script> 
+<script type="text/javascript" src="js/prettify/prettify.js"></script> 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="js/layout.js"></script>
+<script src="js/jquery.localscroll-1.2.7.js" type="text/javascript"></script>
+<script src="js/jquery.scrollTo-1.4.3.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../wp-content/themes/piha/js/top-bar-l1.js" ></script>
+<script type="text/javascript" src="../../wp-content/themes/piha/js/bsa-ads-l1.js" ></script>
+</body>
+</html>
