@@ -1,5 +1,3 @@
-LoginCooldown = {}
-
 function connectUser(source, user_id)
     if API.users[user_id] then
         return
@@ -30,38 +28,26 @@ AddEventHandler(
             CancelEvent()
             return
         end
-
-        if LoginCooldown[ids[1]] == nil then
-            deferrals.update('Verificando sua whitelist...')
-            if API.isWhitelisted(ids[1]) then
-                local user_id = API.getUserIdByIdentifiers(ids, playerName)
-                if user_id then
-                    deferrals.update('Checando lista de banimentos...')
-                    if API.isBanned(user_id) == 0 then
-                        if API.users[user_id] == nil then
-                            deferrals.update('Tudo encontrado, carregando seus dados...')
-                            API.onFirstSpawn[user_id] = true
-                            deferrals.done()
-                        end
-                    else
-                        deferrals.done('Você está banido do servidor.')
-                        CancelEvent()
+        deferrals.update('Verificando sua whitelist...')
+        if API.isWhitelisted(ids[1]) then
+            local user_id = API.getUserIdByIdentifiers(ids, playerName)
+            if user_id then
+                deferrals.update('Checando lista de banimentos...')
+                if API.isBanned(user_id) == 0 then
+                    if API.users[user_id] == nil then
+                        deferrals.update('Tudo encontrado, carregando seus dados...')
+                        API.onFirstSpawn[user_id] = true
+                        deferrals.done()
                     end
+                else
+                    deferrals.done('Você está banido do servidor.')
+                    CancelEvent()
                 end
-            else
-                LoginCooldown[ids[1]] = true
-                Citizen.CreateThread(
-                    function()
-                        Citizen.Wait(60000)
-                        LoginCooldown[ids[1]] = nil
-                    end
-                )
-                print(playerName .. ' (' .. ids[1] .. ') tentou conectar sem whitelist')
-                deferrals.done('Você não está permitido para entrar no servidor. HEX: ' .. ids[1])
-                CancelEvent()
             end
         else
-            deferrals.done('Aguarde um minuto para ser removido da lista de não-whitelist.')
+            print(playerName .. ' (' .. ids[1] .. ') tentou conectar sem whitelist')
+            deferrals.done('Você não está permitido para entrar no servidor. HEX: ' .. ids[1])
+            CancelEvent()
         end
     end
 )
