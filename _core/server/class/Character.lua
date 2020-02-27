@@ -190,19 +190,18 @@ function API.Character(id, charName, level, xp, groups, inventory)
     self.playerDead = function()
         self.Inventory:deleteInventory()
     end
-
+    
     self.savePosition = function(this, source)
-        local x,y,z = cAPI.getPosition(source)
+        local x,y,z = API.getPlayerPos(source)
         local encoded = {
             ['x'] = tonumber(math.floor(x * 100) / 100),
             ['y'] = tonumber(math.floor(y * 100) / 100),
             ['z'] = tonumber(math.floor(z * 100) / 100)
         }
         self:setData(self.id, 'charTable', "position", json.encode(encoded))
-        return true
     end
 
-    self.getLastPos = function(this, source)
+    self.getLastPos = function(this)
         return json.decode(self:getData(self.id, 'charTable', "position"))
     end
 

@@ -103,26 +103,26 @@ function API.User(source, id, ipAddress)
     end
 
     self.saveCharacter = function()
-        return self.Character:savePosition(self.source)
+        self.Character:savePosition(self:getSource())
     end
 
     self.drawCharacter = function()
-        if cAPI.setModel(self.source, self.Character:getModel()) then
+        if cAPI.setModel(self:getSource(), self.Character:getModel()) then
             Wait(200)
-            if cAPI.startNeeds(self.source) then
+            if cAPI.startNeeds(self:getSource()) then
                 Wait(100)
-                if cAPI.setDados(self.source, self.Character:getCharTable()) then
+                if cAPI.setDados(self:getSource(), self.Character:getCharTable()) then
                     Wait(100)
-                    cAPI.setClothes(self.source, self.Character:getClothes())
+                    cAPI.setClothes(self:getSource(), self.Character:getClothes())
                     Wait(100)
-                    cAPI.teleportSpawn(self.source, self.Character:getLastPos(self.source))
+                    cAPI.teleportSpawn(self:getSource(), self.Character:getLastPos(self:getSource()))
                 end
             end
         end
     end
 
     self.disconnect = function(this, reason)
-        DropPlayer(self.source, reason)
+        DropPlayer(self:getSource(), reason)
     end
 
     self.viewInventory = function()

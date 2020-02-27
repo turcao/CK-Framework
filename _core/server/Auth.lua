@@ -13,7 +13,7 @@ function connectUser(source, user_id)
     cAPI._clientConnected(source, true)
 
     print(GetPlayerName(source) .. ' (' .. User:getIpAddress() .. ') entrou (user_id = ' .. user_id .. ')')
-    TriggerEvent('fcrp_identity:charList', source) -- chame sua lista de characters aqui!
+    TriggerEvent('fcrp_identity:charList', source) -- here you put your charlist :D
     return User
 end
 

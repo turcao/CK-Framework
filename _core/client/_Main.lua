@@ -30,9 +30,19 @@ Citizen.CreateThread(
 	end
 )
 
+Citizen.CreateThread(function()
+    while true do
+        local playerPed = PlayerPedId()
+        if playerPed and playerPed ~= -1 then
+        	TriggerServerEvent('updatePosOnServerForPlayer', { table.unpack(GetEntityCoords(playerPed)) })
+        end
+        Citizen.Wait(5000)
+    end
+end)
+
 function cAPI.getPosition()
 	local x, y, z = table.unpack(GetEntityCoords(PlayerPedId(), true))
-	return x, y, z
+	return x,y,z
 end
 
 function cAPI.teleport(x, y, z, spawn)
