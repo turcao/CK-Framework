@@ -7,7 +7,7 @@ local API = exports['GHMattiMySQL']
 DBConnect = {
 	driver = 'ghmattimysql',
 	host = '127.0.0.1',
-	database = 'fcrp',
+	database = 'ckdev',
 	user = 'root',
 	password = ''
 }

@@ -74,6 +74,16 @@
                 <pre class="prettyprint"><img src="https://i.imgur.com/JjHGtmp.png"></img></pre>
                 <h3 id="UsingType"> Using</h3>
                 <ul>
+                    <li>Getting a API object</li>
+                </ul>
+                <pre class="prettyprint">
+local Tunnel = module('_core', 'libs/Tunnel')
+local Proxy = module('_core', 'libs/Proxy')
+
+API = Tunnel.getInterface('API')
+cAPI = Proxy.getInterface('API')
+</pre>
+                <ul>
                     <li>Getting a User Object from a player source:</li>
                 </ul>
                 <pre class="prettyprint">
@@ -225,15 +235,6 @@ local value = 5
 Character:removeXp(value) -- remove 5 xp :D
 </pre> To see more functions, go to
                 <font style="color:red">_core/server/class/</font> and choose :)
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     </section>

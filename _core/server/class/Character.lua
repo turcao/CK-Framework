@@ -70,7 +70,7 @@ function API.Character(id, charName, level, xp, groups, inventory)
     end
 
     self.getModel = function()
-        return self:getData(self.id, 'charTable', 'model')
+        return self:getData(self.id, 'charTable', 'model') or "mp_male"
     end
 
     self.getCharTable = function()

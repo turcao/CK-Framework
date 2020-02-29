@@ -3,6 +3,8 @@ This is a framework still under development where all content is open source, an
 
 CK-Framework has its own [Official Discord](https://discord.io/ckframework).
 
+![CK.F](https://cdn.discordapp.com/attachments/571854796831719441/683020504537366541/CK_logo.png)
+
 ## 💻 Installation
 
 ### Gamemode Setup & Installation
@@ -16,6 +18,10 @@ CK-Framework has its own [Official Discord](https://discord.io/ckframework).
 -   Import the database to your MariaDB
 -   Change `GHMattiMySQL/settings.xml` to your connection database and `_core/server/database.lua`
 -   After this steps, only put online and go work in your scripts
+
+
+#### ★ Scripts Example:
+
 
 ### If you need any support, or anything, visit our discord, there we will be dealing with everything about this framework!
 

@@ -9,8 +9,10 @@ API.chars = {}
 
 API.onFirstSpawn = {}
 
+-- API Server Export
 Proxy.addInterface("API", API)
 Tunnel.bindInterface("API", API)
+-- API_Database Export
 Tunnel.bindInterface("API_DB", API_Database)
 Proxy.addInterface("API_DB", API_Database)
 cAPI = Tunnel.getInterface("API")
