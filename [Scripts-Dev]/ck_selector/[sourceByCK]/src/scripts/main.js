@@ -1,5 +1,4 @@
 import CharSelect from "./views/char-select";
-console.log(CharSelect)
 
 class Main {
 	constructor() {

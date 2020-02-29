@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.common';
 
 class CharSelect {
   constructor() {
-    if(window.location.href.indexOf('select-character') > -1) {
+    if (window.location.href.indexOf('select-character') > -1) {
       this.initScript();
     }
   }
@@ -13,23 +13,23 @@ class CharSelect {
       data: {
         showCharList: false,
         characters: [],
-	    },
+      },
       methods: {
-        deleteChar: function(charid) {
-          console.log(charid)
+        deleteChar: function (charid) {
+          $.post("http://ck_selector/DeleteCharacter", JSON.stringify({charid}));
         },
-        selectChar: function(charid) {
-          console.log(charid)
+        selectChar: function (charid) {
+          $.post("http://ck_selector/SelectCharacter", JSON.stringify({charid}));
         },
-        emitCharacters: function(listcharacters) {
+        emitCharacters: function (listcharacters) {
+          this.characters = null;
           this.showCharList = true;
           this.characters = listcharacters;
         },
-        clearCharacters: function(){
+        clearCharacters: function () {
           this.showCharList = false;
-          this.characters = null;
         },
-        createCharacter: function(){
+        createCharacter: function () {
           this.clearCharacters();
           $.post("http://ck_selector/CreateCharacter", JSON.stringify({}));
         }
@@ -42,10 +42,14 @@ class CharSelect {
   }
 }
 
-window.addEventListener('message', function(event) {
-  switch(event.data.action) {
-    case "listCharacters":
-      window.vm.emitCharacters(event.data.listcharacters);
+window.addEventListener('message', function (event) {
+  switch (event.data.action) {
+    case "listchar":
+      if (event.data.characters) {
+        window.vm.emitCharacters(event.data.characters);
+      } else {
+        window.vm.emitCharacters([]);
+      }
       break;
     case "closeCharacters":
       window.vm.clearCharacters();
